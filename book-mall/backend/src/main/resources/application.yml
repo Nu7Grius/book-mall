@@ -53,4 +53,4 @@ logging:
 
 file:
   upload:
-    path: ${user.dir}/../uploads  # 文件上传路径（user.dir 为 IDEA 工作目录 backend/，../uploads 指向 book-mall/uploads/）
+    path: ../uploads  # 文件上传路径（相对路径，WebMvcConfig 会自动解析为绝对路径）

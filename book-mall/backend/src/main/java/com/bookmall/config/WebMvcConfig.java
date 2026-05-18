@@ -6,6 +6,8 @@ import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 import org.springframework.web.servlet.resource.PathResourceResolver;
 
+import java.io.File;
+
 @Configuration
 public class WebMvcConfig implements WebMvcConfigurer {
 
@@ -14,20 +16,25 @@ public class WebMvcConfig implements WebMvcConfigurer {
 
     @Override
     public void addResourceHandlers(ResourceHandlerRegistry registry) {
-        String uploadDir = uploadPath.replace("\\", "/");
-        if (!uploadDir.endsWith("/")) {
-            uploadDir = uploadDir + "/";
+        File uploadDir = new File(uploadPath);
+        String absolutePath;
+        try {
+            absolutePath = uploadDir.getCanonicalPath().replace("\\", "/");
+        } catch (Exception e) {
+            absolutePath = uploadPath.replace("\\", "/");
         }
-        String filePath = "file:" + uploadDir;
+        if (!absolutePath.endsWith("/")) {
+            absolutePath = absolutePath + "/";
+        }
 
         registry.addResourceHandler("/uploads/**")
-                .addResourceLocations(filePath)
+                .addResourceLocations("file:" + absolutePath)
                 .setCachePeriod(3600)
                 .resourceChain(true)
                 .addResolver(new PathResourceResolver());
 
         registry.addResourceHandler("/avatar/**")
-                .addResourceLocations("file:" + uploadDir + "avatar/")
+                .addResourceLocations("file:" + absolutePath + "avatar/")
                 .setCachePeriod(3600)
                 .resourceChain(true)
                 .addResolver(new PathResourceResolver());
