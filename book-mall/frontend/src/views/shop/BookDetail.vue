@@ -278,12 +278,7 @@ export default {
           });
       }
     },
-    getImageUrl(path) {
-      if (!path) return "";
-      if (path.startsWith("http")) return path;
-      if (path.startsWith("data:")) return path;
-      return "http://localhost:8080" + path;
-    },
+
     formatDate(date) {
       if (!date) return "";
       const d = new Date(date);

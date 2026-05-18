@@ -85,8 +85,6 @@
 </template>
 
 <script>
-import { getImageUrl } from "@/utils/img";
-
 export default {
   name: "Cart",
   data() {
@@ -134,6 +132,7 @@ export default {
         }
       });
     },
+
     handleSelectionChange(val) {
       this.selectedItems = val;
     },

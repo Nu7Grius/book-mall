@@ -136,7 +136,7 @@ public class MerchantController {
             }
             stats.put("shopType", shopType);
 
-            stats.put("avatar", merchant.getAvatar());
+            stats.put("logo", merchant.getLogo());
             stats.put("totalSales", totalSales);
             stats.put("bookCount", bookCount);
             stats.put("registerTime", merchant.getCreateTime());

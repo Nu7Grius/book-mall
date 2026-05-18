@@ -25,55 +25,64 @@ import java.util.UUID;
 @CrossOrigin
 public class FileUploadController {
 
-    @Value("${file.upload.path:D:/uploads}")
+    @Value("${file.upload.path:./uploads}")
     private String uploadPath;
+
+    /**
+     * 解析上传路径，支持相对路径
+     */
+    private String resolveUploadPath() {
+        if (uploadPath.startsWith("./")) {
+            String basePath = System.getProperty("user.dir");
+            return basePath + File.separator + uploadPath.substring(2);
+        } else if (new File(uploadPath).isAbsolute()) {
+            return uploadPath;
+        } else {
+            String basePath = System.getProperty("user.dir");
+            return basePath + File.separator + uploadPath;
+        }
+    }
 
     /**
      * 图片上传接口
      */
     @PostMapping("/image")
     public Result<String> uploadImage(@RequestParam("file") MultipartFile file, HttpServletRequest request) {
-        // 检查文件是否为空
         if (file.isEmpty()) {
             return Result.error(400, "请选择要上传的文件");
         }
 
-        // 检查文件类型
         String contentType = file.getContentType();
         if (contentType == null || !contentType.startsWith("image/")) {
             return Result.error(400, "只能上传图片文件");
         }
 
-        // 检查文件大小（最大 5MB）
         if (file.getSize() > 5 * 1024 * 1024) {
             return Result.error(400, "文件大小不能超过 5MB");
         }
 
         try {
-            // 创建上传目录
-            File uploadDir = new File(uploadPath);
+            String resolvedPath = resolveUploadPath();
+
+            File uploadDir = new File(resolvedPath);
             if (!uploadDir.exists()) {
                 uploadDir.mkdirs();
             }
 
-            // 生成文件名
             String originalFilename = file.getOriginalFilename();
             String suffix = originalFilename != null ? originalFilename.substring(originalFilename.lastIndexOf("."))
                     : ".jpg";
             String filename = UUID.randomUUID().toString() + suffix;
 
-            // 按日期创建子目录
             String datePath = new SimpleDateFormat("yyyy-MM-dd").format(new Date());
-            File dateDir = new File(uploadPath, datePath);
+            File dateDir = new File(resolvedPath, datePath);
             if (!dateDir.exists()) {
                 dateDir.mkdirs();
             }
 
-            // 保存文件
             File destFile = new File(dateDir, filename);
             file.transferTo(destFile);
 
-            // 返回访问路径
             String fileUrl = "/uploads/" + datePath + "/" + filename;
 
             return Result.success("上传成功", fileUrl);
@@ -89,7 +98,8 @@ public class FileUploadController {
     @GetMapping("/file{datePath}/{filename}")
     public ResponseEntity<Resource> getFile(@PathVariable String datePath, @PathVariable String filename) {
         try {
-            String fullPath = uploadPath + File.separator + datePath + File.separator + filename;
+            String resolvedPath = resolveUploadPath();
+            String fullPath = resolvedPath + File.separator + datePath + File.separator + filename;
             File file = new File(fullPath);
 
             if (!file.exists()) {

@@ -207,7 +207,6 @@
 
 <script>
 import * as echarts from "echarts";
-import { getImageUrl } from "@/utils/img";
 
 export default {
   name: "MerchantHome",

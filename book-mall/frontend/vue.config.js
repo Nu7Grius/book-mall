@@ -21,6 +21,10 @@ module.exports = defineConfig({
       '/uploads': {
         target: 'http://localhost:8080',
         changeOrigin: true
+      },
+      '/avatar': {
+        target: 'http://localhost:8080',
+        changeOrigin: true
       }
     }
   }

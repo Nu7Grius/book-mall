@@ -1401,16 +1401,6 @@ export default {
       const seconds = String(date.getSeconds()).padStart(2, "0");
       return `${year}-${month}-${day} ${hours}:${minutes}:${seconds}`;
     },
-    getImageUrl(url) {
-      if (!url) return "";
-      if (url.startsWith("data:")) {
-        return url;
-      }
-      if (url.startsWith("http://") || url.startsWith("https://")) {
-        return url;
-      }
-      return this.$http.defaults.baseURL + url;
-    },
     getReasonText(reason) {
       const reasons = {
         1: "商品损坏",

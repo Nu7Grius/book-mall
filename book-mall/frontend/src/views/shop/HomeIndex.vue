@@ -229,8 +229,6 @@
 </template>
 
 <script>
-import { getImageUrl } from "@/utils/img";
-
 export default {
   name: "HomeIndex",
   data() {
@@ -411,7 +409,7 @@ export default {
         this.newBooks = this.allNewBooks.slice(0, 8);
       }
     },
-    getImageUrl,
+
     getMerchantTypeName(type) {
       const typeMap = {
         self: "自营",

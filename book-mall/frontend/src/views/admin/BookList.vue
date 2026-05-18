@@ -360,7 +360,6 @@
 <script>
 import { getBookPage, deleteBook } from "@/api/book";
 import request from "@/api/request";
-import { getImageUrl } from "@/utils/img";
 
 export default {
   name: "BookList",
@@ -728,12 +727,6 @@ export default {
             });
         })
         .catch(() => {});
-    },
-    getImageUrl(path) {
-      if (!path) return "";
-      if (path.startsWith("http")) return path;
-      if (path.startsWith("data:")) return path;
-      return "http://localhost:8080" + path;
     },
   },
 };

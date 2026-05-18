@@ -351,8 +351,6 @@
 </template>
 
 <script>
-import { getImageUrl } from "@/utils/img";
-
 export default {
   name: "AdminProfile",
   data() {
@@ -669,11 +667,7 @@ export default {
       const minute = String(date.getMinutes()).padStart(2, "0");
       return `${year}-${month}-${day} ${hour}:${minute}`;
     },
-    getImageUrl(path) {
-      if (!path) return "";
-      if (path.startsWith("http")) return path;
-      return "http://localhost:8080" + path;
-    },
+
     triggerAvatarUpload() {
       this.$refs.avatarInput.click();
     },

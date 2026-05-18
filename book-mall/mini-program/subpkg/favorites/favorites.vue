@@ -71,7 +71,6 @@
 <script>
 import { getFavoriteList, removeFavorite } from "../../api/favorite.js";
 import { addToCart as addToCartApi } from "../../api/cart.js";
-import { getImageUrl } from "../../utils/image.js";
 
 export default {
   data() {
@@ -127,12 +126,7 @@ export default {
       try {
         const res = await getFavoriteList(this.userId);
         if (res.code === 200) {
-          this.favoritesList = (res.data || []).map((item) => ({
-            ...item,
-            coverImage: item.coverImage
-              ? getImageUrl(item.coverImage)
-              : "/static/default-cover.png",
-          }));
+          this.favoritesList = res.data || [];
         }
       } catch (error) {
         console.error("加载收藏列表失败:", error);

@@ -213,12 +213,22 @@
                 {{ currentComment.bookAuthor }}
               </div>
             </div>
-            <el-avatar
-              :src="currentComment.bookCover"
-              :size="60"
-              shape="square"
+            <el-image
+              :src="getImageUrl(currentComment.bookCover)"
+              fit="cover"
+              style="
+                width: 60px;
+                height: 80px;
+                border-radius: 6px;
+                flex-shrink: 0;
+              "
               class="header-cover"
-            />
+              :preview-src-list="[getImageUrl(currentComment.bookCover)]"
+            >
+              <div slot="error" class="image-error">
+                <i class="el-icon-picture-outline"></i>
+              </div>
+            </el-image>
           </div>
         </div>
         <el-divider />
@@ -294,7 +304,6 @@
 
 <script>
 import E from "wangeditor";
-import { getImageUrl } from "@/utils/img";
 
 export default {
   name: "MerchantComment",

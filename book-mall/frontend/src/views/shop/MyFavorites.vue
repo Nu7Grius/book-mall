@@ -59,8 +59,6 @@
 </template>
 
 <script>
-import { getImageUrl } from "@/utils/img";
-
 export default {
   name: "MyFavorites",
   data() {
@@ -106,6 +104,7 @@ export default {
           this.loading = false;
         });
     },
+
     viewBook(bookId) {
       this.$router
         .push(`/home/book-detail/${bookId}`)

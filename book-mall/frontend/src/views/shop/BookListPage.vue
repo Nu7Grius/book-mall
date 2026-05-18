@@ -186,8 +186,6 @@
 </template>
 
 <script>
-import { getImageUrl } from "@/utils/img";
-
 export default {
   name: "BookListPage",
   props: {
@@ -256,7 +254,7 @@ export default {
   },
   methods: {
     loadCategories() {
-      this.$http.get("/category/list").then((res) => {
+      this.$http.get("/category/flat-list").then((res) => {
         if (res.code === 200) {
           this.categoryList = res.data || [];
           this.firstCategoryList = this.categoryList.filter(
@@ -397,6 +395,7 @@ export default {
           .catch(() => Promise.resolve());
       }
     },
+
     goToDetail(id) {
       this.$router.push(`/home/book-detail/${id}`);
     },

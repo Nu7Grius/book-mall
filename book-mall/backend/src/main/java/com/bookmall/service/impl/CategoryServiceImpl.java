@@ -39,6 +39,14 @@ public class CategoryServiceImpl extends ServiceImpl<CategoryMapper, Category> i
   }
 
   @Override
+  public List<Category> getFlatList() {
+    LambdaQueryWrapper<Category> wrapper = new LambdaQueryWrapper<>();
+    wrapper.orderByAsc(Category::getSortOrder);
+    List<Category> allCategories = this.list(wrapper);
+    return allCategories;
+  }
+
+  @Override
   public Map<String, Object> getCategoryPage(Integer page, Integer pageSize, String categoryName,
       Integer categoryLevel) {
     LambdaQueryWrapper<Category> wrapper = new LambdaQueryWrapper<>();

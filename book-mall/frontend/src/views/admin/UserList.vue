@@ -365,7 +365,6 @@
 
 <script>
 import { getUserList, addUser, updateUser, deleteUser } from "@/api/user";
-import { getImageUrl } from "@/utils/img";
 
 export default {
   name: "UserList",
@@ -522,6 +521,7 @@ export default {
     getRowIndex(index) {
       return (this.pagination.page - 1) * this.pagination.pageSize + index + 1;
     },
+
     formatTime(time) {
       if (!time) return "-";
       const date = new Date(time);

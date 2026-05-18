@@ -159,7 +159,6 @@
 
 <script>
 import regions from "@/utils/regions.js";
-import { getImageUrl } from "@/utils/img";
 
 export default {
   name: "ConfirmOrder",

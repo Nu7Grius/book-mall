@@ -259,8 +259,6 @@
 </template>
 
 <script>
-import { getImageUrl } from "@/utils/img";
-
 export default {
   name: "MyOrders",
   data() {
@@ -378,6 +376,7 @@ export default {
     viewOrderDetail(order) {
       this.$router.push(`/home/order-detail/${order.id}`);
     },
+
     getStatusType(status) {
       const typeMap = {
         待付款: "warning",

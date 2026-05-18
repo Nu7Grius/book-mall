@@ -95,20 +95,22 @@
           align="center"
           :index="getRowIndex"
         ></el-table-column>
-        <el-table-column label="头像" width="80" align="center">
+        <el-table-column label="Logo" width="80" align="center">
           <template slot-scope="scope">
-            <el-avatar
-              v-if="scope.row.avatar"
-              :size="40"
-              :src="getImageUrl(scope.row.avatar)"
-            ></el-avatar>
-            <el-avatar v-else :size="40">
-              {{
-                scope.row.username
-                  ? scope.row.username.charAt(0).toUpperCase()
-                  : "M"
-              }}
-            </el-avatar>
+            <el-image
+              v-if="scope.row.logo"
+              :src="getImageUrl(scope.row.logo)"
+              fit="cover"
+              style="width: 50px; height: 50px; border-radius: 6px"
+              :preview-src-list="[getImageUrl(scope.row.logo)]"
+            >
+              <div slot="error" class="image-error">
+                <i class="el-icon-picture-outline"></i>
+              </div>
+            </el-image>
+            <div v-else class="logo-placeholder">
+              <i class="el-icon-picture-outline"></i>
+            </div>
           </template>
         </el-table-column>
         <el-table-column
@@ -420,7 +422,6 @@
 
 <script>
 import { getUserList, addUser, updateUser, deleteUser } from "@/api/user";
-import { getImageUrl } from "@/utils/img";
 
 export default {
   name: "MerchantList",
@@ -556,6 +557,7 @@ export default {
     getRowIndex(index) {
       return (this.pagination.page - 1) * this.pagination.pageSize + index + 1;
     },
+
     triggerAvatarUpload() {
       this.$refs.avatarInput.click();
     },
@@ -1010,6 +1012,28 @@ export default {
 
 .reset-password-dialog ::v-deep .el-dialog__headerbtn .el-dialog__close {
   color: white;
+}
+
+.logo-placeholder {
+  width: 50px;
+  height: 50px;
+  border-radius: 6px;
+  background: #f5f7fa;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #c0c4cc;
+  font-size: 20px;
+}
+
+.image-error {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 100%;
+  background: #f5f7fa;
+  color: #c0c4cc;
 }
 
 .reset-password-dialog ::v-deep .el-dialog__body {

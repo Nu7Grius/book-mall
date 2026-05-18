@@ -90,8 +90,6 @@
 </template>
 
 <script>
-import { getImageUrl } from "@/utils/img";
-
 export default {
   name: "ShopHome",
   props: {
@@ -220,6 +218,7 @@ export default {
         }
       );
     },
+
     goToDetail(id) {
       this.$router.push(`/home/book-detail/${id}`);
     },

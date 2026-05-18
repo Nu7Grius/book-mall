@@ -458,7 +458,6 @@
 
 <script>
 import { getUserList, addUser, updateUser, deleteUser } from "@/api/user";
-import { getImageUrl } from "@/utils/img";
 
 export default {
   name: "AdminList",
@@ -626,6 +625,7 @@ export default {
     getRowIndex(index) {
       return (this.pagination.page - 1) * this.pagination.pageSize + index + 1;
     },
+
     triggerAvatarUpload() {
       this.$refs.avatarInput.click();
     },

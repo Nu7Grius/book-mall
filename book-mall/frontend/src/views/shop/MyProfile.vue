@@ -209,8 +209,6 @@
 </template>
 
 <script>
-import { getImageUrl } from "@/utils/img";
-
 export default {
   name: "MyProfile",
   data() {
@@ -357,6 +355,7 @@ export default {
         }
       });
     },
+
     triggerUpload() {
       this.$refs.avatarInput.click();
     },

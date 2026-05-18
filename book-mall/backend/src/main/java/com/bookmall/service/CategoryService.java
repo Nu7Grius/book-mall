@@ -10,5 +10,7 @@ public interface CategoryService extends IService<Category> {
 
   List<Category> getTreeList();
 
+  List<Category> getFlatList();
+
   List<Long> getAllChildIds(Long parentId);
 }

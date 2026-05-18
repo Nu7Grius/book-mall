@@ -39,7 +39,7 @@ logs/
 Thumbs.db
 
 # Application specific
-# uploads/ - 保留上传目录以便其他开发者可以访问示例图片资源
+uploads/
 *.log
 *.db
 

@@ -280,7 +280,6 @@ import {
   deleteNotice,
 } from "@/api/notice";
 import RichEditor from "@/components/RichEditor.vue";
-import { getImageUrl } from "@/utils/img";
 
 export default {
   name: "NoticeList",
@@ -341,6 +340,7 @@ export default {
     getRowIndex(index) {
       return (this.pagination.page - 1) * this.pagination.pageSize + index + 1;
     },
+
     stripHtml(html) {
       if (!html) return "";
       return html.replace(/<[^>]*>/g, "");

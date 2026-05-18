@@ -25,16 +25,31 @@ public class FileController {
     private String uploadPath;
 
     /**
+     * 解析上传路径，支持相对路径
+     */
+    private String resolveUploadPath() {
+        if (uploadPath.startsWith("./")) {
+            String basePath = System.getProperty("user.dir");
+            return basePath + File.separator + uploadPath.substring(2);
+        } else if (new File(uploadPath).isAbsolute()) {
+            return uploadPath;
+        } else {
+            String basePath = System.getProperty("user.dir");
+            return basePath + File.separator + uploadPath;
+        }
+    }
+
+    /**
      * 获取图片文件
-     * 
+     *
      * @param path 图片路径（相对于upload目录）
      */
     @GetMapping("/image")
     public ResponseEntity<Resource> getImage(@RequestParam String path) {
         try {
-            // 解码URL编码的路径
+            String resolvedPath = resolveUploadPath();
             String decodedPath = URLDecoder.decode(path, StandardCharsets.UTF_8.name());
-            String fullPath = uploadPath + File.separator + decodedPath;
+            String fullPath = resolvedPath + File.separator + decodedPath;
             File file = new File(fullPath);
 
             if (!file.exists() || !file.isFile()) {
@@ -43,7 +58,6 @@ public class FileController {
 
             Resource resource = new FileSystemResource(file);
 
-            // 根据文件扩展名设置Content-Type
             String filename = file.getName().toLowerCase();
             MediaType mediaType;
             if (filename.endsWith(".png")) {

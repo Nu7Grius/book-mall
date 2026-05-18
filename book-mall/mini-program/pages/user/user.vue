@@ -7,10 +7,15 @@
           class="avatar"
           :src="userInfo.avatar || '/static/icons/user.png'"
           mode="aspectFill"
-          @click="changeAvatar"
+          @click="handleAvatarClick"
         ></image>
         <view class="info-content">
-          <text class="username">{{ userInfo.realName || "未登录" }}</text>
+          <text
+            class="username"
+            :class="{ 'not-login': !isLoggedIn }"
+            @click="goToLogin"
+            >{{ userInfo.realName || "未登录" }}</text
+          >
         </view>
       </view>
     </view>
@@ -186,6 +191,20 @@ export default {
       } else {
         this.isLoggedIn = false;
         this.userInfo = {};
+      }
+    },
+    goToLogin() {
+      if (!this.isLoggedIn) {
+        uni.navigateTo({
+          url: "/pages/login/login",
+        });
+      }
+    },
+    handleAvatarClick() {
+      if (this.isLoggedIn) {
+        this.changeAvatar();
+      } else {
+        this.goToLogin();
       }
     },
     async loadUserInfo() {
@@ -407,6 +426,13 @@ export default {
   font-size: 36rpx;
   font-weight: bold;
   margin-bottom: 8rpx;
+}
+
+.username.not-login {
+  color: #fff;
+  opacity: 0.8;
+  text-decoration: underline;
+  text-decoration-style: dotted;
 }
 
 .order-section {

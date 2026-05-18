@@ -215,13 +215,20 @@
                   {{ index + 1 }}
                 </div>
                 <div class="merchant-info">
-                  <el-avatar
-                    :size="60"
-                    :src="getImageUrl(merchant.avatar)"
-                    class="merchant-avatar"
+                  <el-image
+                    v-if="merchant.logo"
+                    :src="getImageUrl(merchant.logo)"
+                    fit="cover"
+                    class="merchant-logo"
+                    :preview-src-list="[getImageUrl(merchant.logo)]"
                   >
-                    {{ merchant.shopName ? merchant.shopName.charAt(0) : "店" }}
-                  </el-avatar>
+                    <div slot="error" class="logo-error">
+                      <i class="el-icon-picture-outline"></i>
+                    </div>
+                  </el-image>
+                  <div v-else class="merchant-logo merchant-logo-placeholder">
+                    <i class="el-icon-shop"></i>
+                  </div>
                   <el-tag
                     v-if="merchant.shopType === '旗舰'"
                     type="warning"
@@ -369,7 +376,6 @@ import {
   getNoticeList,
   getHotMerchants,
 } from "@/api/statistics";
-import { getImageUrl } from "@/utils/img";
 
 export default {
   name: "Home",
@@ -494,6 +500,7 @@ export default {
       };
       return typeMap[type] || "info";
     },
+
     showNoticeDetail(notice) {
       this.currentNotice = notice;
       this.dialogVisible = true;
@@ -646,6 +653,34 @@ export default {
   background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
   font-size: 24px;
   font-weight: bold;
+}
+
+.merchant-logo {
+  width: 60px;
+  height: 60px;
+  margin: 0 auto 15px;
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+.merchant-logo-placeholder {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  font-size: 24px;
+}
+
+.logo-error {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #f5f7fa;
+  color: #c0c4cc;
+  font-size: 24px;
 }
 
 .merchant-name {

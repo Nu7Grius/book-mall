@@ -23,6 +23,12 @@ public class CategoryController {
         return Result.success(treeList);
     }
 
+    @GetMapping("/flat-list")
+    public Result<List<Category>> flatList() {
+        List<Category> flatList = categoryService.getFlatList();
+        return Result.success(flatList);
+    }
+
     @GetMapping("/page")
     public Result<Map<String, Object>> getCategoryPage(
             @RequestParam(defaultValue = "1") Integer page,

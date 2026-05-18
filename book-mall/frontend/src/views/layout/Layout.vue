@@ -112,8 +112,6 @@
 </template>
 
 <script>
-import { getImageUrl } from "@/utils/img";
-
 export default {
   name: "Layout",
   data() {
@@ -157,11 +155,7 @@ export default {
         })
         .catch(() => {});
     },
-    getImageUrl(path) {
-      if (!path) return "";
-      if (path.startsWith("http")) return path;
-      return "http://localhost:8080" + path;
-    },
+
     handleCommand(command) {
       if (command === "logout") {
         this.$confirm("确定要退出登录吗？", "提示", {

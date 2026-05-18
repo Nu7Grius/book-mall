@@ -16,7 +16,19 @@ public class WebMvcConfig implements WebMvcConfigurer {
 
     @Override
     public void addResourceHandlers(ResourceHandlerRegistry registry) {
-        String resolvedPath = resolveUploadPath(uploadPath);
+        String basePath = System.getProperty("user.dir");
+        String resolvedPath;
+
+        if (uploadPath.startsWith("./")) {
+            resolvedPath = basePath + uploadPath.substring(1);
+        } else if (new File(uploadPath).isAbsolute()) {
+            resolvedPath = uploadPath;
+        } else {
+            resolvedPath = basePath + File.separator + uploadPath;
+        }
+
+        resolvedPath = resolvedPath.replace("\\", File.separator).replace("/", File.separator);
+
         String filePath = "file:" + resolvedPath + File.separator;
 
         registry.addResourceHandler("/uploads/**")
@@ -25,23 +37,10 @@ public class WebMvcConfig implements WebMvcConfigurer {
                 .resourceChain(true)
                 .addResolver(new PathResourceResolver());
 
-        String avatarPath = "file:" + resolvedPath + File.separator + "avatar" + File.separator;
         registry.addResourceHandler("/avatar/**")
-                .addResourceLocations(avatarPath)
+                .addResourceLocations(filePath + "avatar" + File.separator)
                 .setCachePeriod(3600)
                 .resourceChain(true)
                 .addResolver(new PathResourceResolver());
-    }
-
-    private String resolveUploadPath(String path) {
-        if (path.startsWith("./")) {
-            String userDir = System.getProperty("user.dir");
-            String resolved = userDir + File.separator + path.substring(2);
-            return resolved.replace("/", File.separator).replace("\\", File.separator);
-        } else if (!new File(path).isAbsolute()) {
-            String userDir = System.getProperty("user.dir");
-            return userDir + File.separator + path;
-        }
-        return path;
     }
 }
