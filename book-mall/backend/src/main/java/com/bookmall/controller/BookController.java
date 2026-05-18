@@ -57,10 +57,6 @@ public class BookController {
         List<Book> books;
         long total = 0;
 
-        logger.info(
-                "图书列表请求 - keyword: {}, categoryId: {}, filterType: {}, priceMin: {}, priceMax: {}, page: {}, size: {}",
-                keyword, categoryId, filterType, priceMin, priceMax, page, size);
-
         // 手动解析categoryIds[]参数（支持categoryIds[]和categoryIds两种格式）
         List<Long> categoryIds = parseCategoryIds(request);
 
