@@ -30,7 +30,7 @@ spring:
     database: 0  # 使用的数据库编号
     timeout: 5000ms  # 连接超时时间
   resources:
-    static-locations: file:../uploads/,classpath:/static/  # 静态资源路径
+    static-locations: classpath:/static/  # 静态资源路径（上传文件由 WebMvcConfig 处理）
 
 mybatis-plus:
   configuration:
@@ -53,4 +53,4 @@ logging:
 
 file:
   upload:
-    path: ../uploads  # 文件上传路径（相对于 backend 目录，指向 book-mall/uploads/）
+    path: ${user.dir}/../uploads  # 文件上传路径（user.dir 为 IDEA 工作目录 backend/，../uploads 指向 book-mall/uploads/）
