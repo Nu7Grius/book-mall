@@ -41,38 +41,6 @@
       </div>
     </div>
 
-    <div class="comment-form" v-if="showForm">
-      <h4>我要评价</h4>
-      <div class="form-item">
-        <span class="label">评分：</span>
-        <el-rate v-model="commentForm.rating" show-text />
-      </div>
-      <div class="form-item">
-        <span class="label">评价内容：</span>
-        <rich-editor
-          v-model="commentForm.content"
-          :height="250"
-          ref="editor"
-        ></rich-editor>
-      </div>
-      <div class="form-item">
-        <el-checkbox v-model="commentForm.isAnonymous">匿名评价</el-checkbox>
-      </div>
-      <div class="form-actions">
-        <el-button type="primary" @click="submitComment" :loading="submitting"
-          >提交评价</el-button
-        >
-        <el-button @click="showForm = false">取消</el-button>
-      </div>
-    </div>
-
-    <div class="comment-actions" v-else>
-      <el-button type="primary" plain @click="showForm = true" v-if="canComment"
-        >我要评价</el-button
-      >
-      <span class="no-orders" v-else>完成订单后可评价</span>
-    </div>
-
     <div class="comment-list">
       <div v-if="loading" class="loading-container">
         <i class="el-icon-loading"></i> 加载中...
@@ -125,14 +93,9 @@
 
 <script>
 import axios from "@/api/request";
-import { Message } from "element-ui";
-import RichEditor from "@/components/RichEditor.vue";
 
 export default {
   name: "BookComment",
-  components: {
-    RichEditor,
-  },
   props: {
     bookId: {
       type: [Number, String],
@@ -148,21 +111,9 @@ export default {
       page: 1,
       pageSize: 10,
       hasMore: false,
-      showForm: false,
-      submitting: false,
-      canComment: false,
-      commentForm: {
-        rating: 5,
-        content: "",
-        isAnonymous: false,
-        orderId: null,
-      },
     };
   },
   computed: {
-    displayRating() {
-      return parseFloat(this.stats.avgRating) || 0;
-    },
     effectiveBookId() {
       return this.bookId || this.$route.params.id;
     },
@@ -170,16 +121,6 @@ export default {
   mounted() {
     this.loadComments();
     this.loadStats();
-    this.checkCanComment();
-
-    const orderId = this.$route.query.orderId;
-    if (orderId) {
-      this.commentForm.orderId = orderId;
-      this.canComment = true;
-      this.$nextTick(() => {
-        this.showForm = true;
-      });
-    }
   },
   watch: {
     effectiveBookId: {
@@ -198,7 +139,6 @@ export default {
       if (!bookId) {
         return;
       }
-
       this.loading = true;
       try {
         const res = await axios.get(`/comment/book/${bookId}`);
@@ -216,7 +156,6 @@ export default {
       if (!bookId) {
         return;
       }
-
       try {
         const res = await axios.get(`/comment/stats/${bookId}`);
         if (res.code === 200) {
@@ -224,93 +163,6 @@ export default {
         }
       } catch (error) {
         this.$message.error("加载统计失败");
-      }
-    },
-    async checkCanComment() {
-      const user = JSON.parse(localStorage.getItem("user") || "{}");
-      if (!user.id) {
-        this.canComment = false;
-        return;
-      }
-      const bookId = this.effectiveBookId;
-      if (!bookId) {
-        this.canComment = false;
-        return;
-      }
-      try {
-        const res = await axios.get(`/order/user/${user.id}`);
-        if (res.code === 200) {
-          const orders = res.data?.records || res.data || [];
-          this.canComment = orders.some(o =>
-            (o.orderStatus === 'PENDING_REVIEW' || o.orderStatus === '待评价') &&
-            o.items && o.items.some(item => item.bookId == bookId)
-          );
-        }
-      } catch (error) {
-        this.canComment = false;
-      }
-    },
-    async submitComment() {
-      const bookId = this.effectiveBookId;
-      if (!bookId) {
-        Message.warning("无法获取图书信息");
-        return;
-      }
-
-      const content = this.commentForm.content;
-      if (
-        !content ||
-        content.trim() === "<p><br></p>" ||
-        !content.replace(/<[^>]*>/g, "").trim()
-      ) {
-        Message.warning("请输入评价内容");
-        return;
-      }
-      this.submitting = true;
-      try {
-        const user = JSON.parse(localStorage.getItem("user") || "{}");
-        if (!user.id) {
-          Message.warning("请先登录");
-          this.$router.push("/login").catch(() => {});
-          return;
-        }
-        const res = await axios.post("/comment", {
-          bookId: bookId,
-          userId: user.id,
-          rating: this.commentForm.rating,
-          content: this.commentForm.content,
-          isAnonymous: this.commentForm.isAnonymous ? 1 : 0,
-          orderId: this.commentForm.orderId,
-        });
-        if (res.code === 200) {
-          Message.success("评价成功");
-          if (this.commentForm.orderId) {
-            await axios.put("/order/" + this.commentForm.orderId + "/complete");
-          }
-          this.showForm = false;
-          this.commentForm = {
-            rating: 5,
-            content: "",
-            isAnonymous: false,
-            orderId: null,
-          };
-          this.loadComments();
-          this.loadStats();
-        } else if (res.code === 401) {
-          Message.warning("请先登录");
-          this.$router.push("/login").catch(() => {});
-        } else {
-          Message.error(res.msg || "评价失败");
-        }
-      } catch (error) {
-        if (error.response && error.response.status === 401) {
-          Message.warning("登录已过期，请重新登录");
-          this.$router.push("/login").catch(() => {});
-        } else {
-          Message.error("提交评价失败");
-        }
-      } finally {
-        this.submitting = false;
       }
     },
     loadMore() {
@@ -437,47 +289,6 @@ export default {
   text-align: right;
   color: #999;
   font-size: 13px;
-}
-
-.comment-form {
-  padding: 20px;
-  background: #f8f8f8;
-  border-radius: 8px;
-  margin-bottom: 20px;
-}
-
-.comment-form h4 {
-  margin: 0 0 15px 0;
-  color: #333;
-}
-
-.form-item {
-  margin-bottom: 15px;
-}
-
-.form-item .label {
-  display: block;
-  margin-bottom: 8px;
-  color: #666;
-}
-
-.form-item rich-editor {
-  display: block;
-  margin-bottom: 10px;
-}
-
-.form-actions {
-  text-align: center;
-  margin-top: 20px;
-}
-
-.comment-actions {
-  margin-bottom: 20px;
-}
-
-.no-orders {
-  color: #999;
-  font-size: 14px;
 }
 
 .comment-list {
