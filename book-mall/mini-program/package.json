@@ -1,0 +1,30 @@
+{
+  "name": "book-mall-mini-program",
+  "version": "1.0.0",
+  "description": "书魂商城微信小程序用户端",
+  "main": "main.js",
+  "scripts": {
+    "dev:mp-weixin": "uni -p mp-weixin && node fix-app.js",
+    "build:mp-weixin": "uni build -p mp-weixin && node fix-app.js",
+    "dev:h5": "uni",
+    "build:h5": "uni build"
+  },
+  "keywords": [
+    "uni-app",
+    "weixin",
+    "miniprogram",
+    "book-mall"
+  ],
+  "author": "",
+  "license": "MIT",
+  "uni-app": {
+    "scripts": {}
+  },
+  "devDependencies": {
+    "@dcloudio/uni-app": "^3.0.0-4010520250107001",
+    "@dcloudio/uni-cli-shared": "^3.0.0-4010520250107001",
+    "@dcloudio/uni-h5": "^3.0.0-4010520250107001",
+    "@dcloudio/uni-mp-weixin": "^3.0.0-4010520250107001",
+    "vue": "^2.7.16"
+  }
+}

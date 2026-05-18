@@ -1,0 +1,49 @@
+# Java
+target/
+*.class
+*.jar
+*.war
+*.ear
+
+# Frontend
+node_modules/
+dist/
+.DS_Store
+
+# IDE
+.idea/
+.vscode/
+*.iml
+*.iws
+*.ipr
+
+# Trae
+.trae/
+
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+
+# Build
+*.log
+logs/
+
+# OS
+*.swp
+*.swo
+*~
+.DS_Store
+Thumbs.db
+
+# Application specific
+uploads/
+*.log
+*.db
+
+# Environment
+.env
+.env.local
+*.local.yml

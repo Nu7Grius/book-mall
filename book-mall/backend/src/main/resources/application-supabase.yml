@@ -1,0 +1,11 @@
+spring:
+  datasource:
+    driver-class-name: org.postgresql.Driver
+    url: jdbc:postgresql://db.uuyrssrityciyelajvzl.supabase.co:5432/postgres
+    username: postgres
+    password: ${SUPABASE_DB_PASSWORD}
+
+mybatis-plus:
+  global-config:
+    db-config:
+      id-type: auto

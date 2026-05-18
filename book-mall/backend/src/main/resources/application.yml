@@ -1,0 +1,56 @@
+server:
+  port: 8080  # 后端服务端口
+  # address: 127.0.0.1  # 仅本机访问（开发环境默认）
+  address: 0.0.0.0    # 允许所有网络接口访问（仅在内网测试时启用）
+  error:
+    include-message: never
+    include-stacktrace: never
+    include-exception: false
+    include-binding-errors: never
+
+spring:
+  application:
+    name: book-mall  # 应用名称
+  mvc:
+    pathmatch:
+      matching-strategy: ant_path_matcher
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/book_mall?useUnicode=true&characterEncoding=utf8&serverTimezone=Asia/Shanghai&useSSL=false&allowPublicKeyRetrieval=true
+    username: root
+    password: wangadmin
+  servlet:
+    multipart:
+      max-file-size: 5MB  # 单个文件最大大小
+      max-request-size: 10MB  # 请求最大大小
+  redis:
+    host: localhost  # Redis 服务器地址
+    port: 6379  # Redis 端口
+    password:  # Redis 密码（没有密码留空）
+    database: 0  # 使用的数据库编号
+    timeout: 5000ms  # 连接超时时间
+  resources:
+    static-locations: file:D:/CommonDataAndInformation/永远期待/永远期待2.0/AI时代/全栈学习计划——书魂管理系统及微信小程序读者端/week10-12（4.27开始）/project/book-mall/uploads/,classpath:/static/  # 静态资源路径
+
+mybatis-plus:
+  configuration:
+    map-underscore-to-camel-case: true  # 开启驼峰命名自动映射
+    # log-impl: org.apache.ibatis.logging.stdout.StdOutImpl  # 关闭 SQL 日志（开发环境）
+  global-config:
+    db-config:
+      id-type: auto  # 主键自增
+      logic-delete-field: deleted  # 全局逻辑删除字段
+      logic-delete-value: 1       # 逻辑删除值
+      logic-not-delete-value: 0   # 未删除值
+  mapper-locations: classpath*:/mapper/**/*.xml  # Mapper XML 路径
+  type-aliases-package: com.bookmall.entity  # 实体类包路径
+
+logging:
+  level:
+    com.bookmall: info  # 日志级别
+    org.springframework: warn
+    com.baomidou.mybatisplus: info
+
+file:
+  upload:
+    path: D:/CommonDataAndInformation/永远期待/永远期待2.0/AI时代/全栈学习计划——书魂管理系统及微信小程序读者端/week10-12（4.27开始）/project/book-mall/uploads  # 文件上传路径

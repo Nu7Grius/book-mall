@@ -1,0 +1,194 @@
+{
+	"pages": [
+		{
+			"path": "pages/home/home",
+			"style": {
+				"navigationBarTitleText": "OpenBook"
+			}
+		},
+		{
+			"path": "pages/login/login",
+			"style": {
+				"navigationBarTitleText": "登录",
+				"navigationStyle": "custom"
+			}
+		},
+		{
+			"path": "pages/register/register",
+			"style": {
+				"navigationBarTitleText": "注册",
+				"navigationStyle": "custom"
+			}
+		},
+		{
+			"path": "pages/book-list/book-list",
+			"style": {
+				"navigationBarTitleText": "图书列表"
+			}
+		},
+		{
+			"path": "pages/category/category",
+			"style": {
+				"navigationBarTitleText": "分类"
+			}
+		},
+		{
+			"path": "pages/book-detail/book-detail",
+			"style": {
+				"navigationBarTitleText": "图书详情",
+				"navigationBarBackgroundColor": "#ffffff"
+			}
+		},
+		{
+			"path": "pages/cart/cart",
+			"style": {
+				"navigationBarTitleText": "购物车"
+			}
+		},
+		{
+			"path": "pages/confirm-order/confirm-order",
+			"style": {
+				"navigationBarTitleText": "确认订单"
+			}
+		},
+		{
+			"path": "pages/order-list/order-list",
+			"style": {
+				"navigationBarTitleText": "我的订单"
+			}
+		},
+		{
+			"path": "pages/order-detail/order-detail",
+			"style": {
+				"navigationBarTitleText": "订单详情"
+			}
+		},
+		{
+			"path": "pages/address-list/address-list",
+			"style": {
+				"navigationBarTitleText": "收货地址"
+			}
+		},
+		{
+			"path": "pages/address-edit/address-edit",
+			"style": {
+				"navigationBarTitleText": "编辑地址"
+			}
+		},
+		{
+			"path": "pages/user/user",
+			"style": {
+				"navigationBarTitleText": "个人中心",
+				"navigationStyle": "custom"
+			}
+		}
+	],
+	"subPackages": [
+		{
+			"root": "subpkg",
+			"pages": [
+				{
+					"path": "favorites/favorites",
+					"style": {
+						"navigationBarTitleText": "我的收藏"
+					}
+				},
+				{
+					"path": "refund-apply/refund-apply",
+					"style": {
+						"navigationBarTitleText": "申请退款"
+					}
+				},
+				{
+					"path": "refund-detail/refund-detail",
+					"style": {
+						"navigationBarTitleText": "退款详情"
+					}
+				},
+				{
+					"path": "comment-list/comment-list",
+					"style": {
+						"navigationBarTitleText": "商品评价"
+					}
+				},
+				{
+					"path": "notice/notice",
+					"style": {
+						"navigationBarTitleText": "系统通知"
+					}
+				},
+				{
+					"path": "notice/notice-detail",
+					"style": {
+						"navigationBarTitleText": "通知详情"
+					}
+				},
+				{
+					"path": "customer-service/customer-service",
+					"style": {
+						"navigationBarTitleText": "联系客服"
+					}
+				},
+				{
+					"path": "edit-profile/edit-profile",
+					"style": {
+						"navigationBarTitleText": "编辑资料"
+					}
+				},
+				{
+					"path": "change-password/change-password",
+					"style": {
+						"navigationBarTitleText": "修改密码"
+					}
+				}
+			]
+		}
+	],
+	"lazyCodeLoading": "requiredComponents",
+	"globalStyle": {
+		"navigationBarTextStyle": "black",
+		"navigationBarTitleText": "OpenBook",
+		"navigationBarBackgroundColor": "#ffffff",
+		"backgroundColor": "#f0fdf4",
+		"enablePullDownRefresh": false
+	},
+	"tabBar": {
+		"color": "#9ca3af",
+		"selectedColor": "#15803d",
+		"borderStyle": "white",
+		"backgroundColor": "#ffffff",
+		"list": [
+			{
+				"pagePath": "pages/home/home",
+				"iconPath": "static/tabbar/home.png",
+				"selectedIconPath": "static/tabbar/home-active.png",
+				"text": "首页"
+			},
+			{
+				"pagePath": "pages/cart/cart",
+				"iconPath": "static/tabbar/cart.png",
+				"selectedIconPath": "static/tabbar/cart-active.png",
+				"text": "购物车"
+			},
+			{
+				"pagePath": "pages/order-list/order-list",
+				"iconPath": "static/tabbar/order.png",
+				"selectedIconPath": "static/tabbar/order-active.png",
+				"text": "订单"
+			},
+			{
+				"pagePath": "pages/user/user",
+				"iconPath": "static/tabbar/user.png",
+				"selectedIconPath": "static/tabbar/user-active.png",
+				"text": "我的"
+			}
+		]
+	},
+	"networkTimeout": {
+		"request": 10000,
+		"connectSocket": 10000,
+		"uploadFile": 10000,
+		"downloadFile": 10000
+	},
+	"debug": true
+}
