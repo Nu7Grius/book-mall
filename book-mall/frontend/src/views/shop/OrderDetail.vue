@@ -686,6 +686,7 @@
 <script>
 import axios from "@/api/request";
 import { Message } from "element-ui";
+import { getImageUrl } from "@/utils/img";
 
 export default {
   name: "OrderDetail",
@@ -771,11 +772,6 @@ export default {
           this.orderItems = res.data || [];
         }
       } catch (error) {}
-    },
-    getImageUrl(path) {
-      if (!path) return "";
-      if (path.startsWith("http")) return path;
-      return "http://localhost:8080" + path;
     },
     canShowRefundButton(item) {
       const canRefundStatuses = ["待发货", "已发货", "待收货"];

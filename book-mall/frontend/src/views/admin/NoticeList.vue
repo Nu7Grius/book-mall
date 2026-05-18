@@ -280,6 +280,7 @@ import {
   deleteNotice,
 } from "@/api/notice";
 import RichEditor from "@/components/RichEditor.vue";
+import { getImageUrl } from "@/utils/img";
 
 export default {
   name: "NoticeList",
@@ -339,11 +340,6 @@ export default {
   methods: {
     getRowIndex(index) {
       return (this.pagination.page - 1) * this.pagination.pageSize + index + 1;
-    },
-    getImageUrl(path) {
-      if (!path) return "";
-      if (path.startsWith("http")) return path;
-      return process.env.VUE_APP_BASE_API.replace("/api", "") + path;
     },
     stripHtml(html) {
       if (!html) return "";

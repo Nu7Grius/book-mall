@@ -186,6 +186,8 @@
 </template>
 
 <script>
+import { getImageUrl } from "@/utils/img";
+
 export default {
   name: "BookListPage",
   props: {
@@ -394,12 +396,6 @@ export default {
           })
           .catch(() => Promise.resolve());
       }
-    },
-    getImageUrl(path) {
-      if (!path) return "";
-      if (path.startsWith("http")) return path;
-      if (path.startsWith("data:")) return path;
-      return "http://localhost:8080" + path;
     },
     goToDetail(id) {
       this.$router.push(`/home/book-detail/${id}`);

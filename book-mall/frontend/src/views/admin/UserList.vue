@@ -365,6 +365,7 @@
 
 <script>
 import { getUserList, addUser, updateUser, deleteUser } from "@/api/user";
+import { getImageUrl } from "@/utils/img";
 
 export default {
   name: "UserList",
@@ -520,11 +521,6 @@ export default {
   methods: {
     getRowIndex(index) {
       return (this.pagination.page - 1) * this.pagination.pageSize + index + 1;
-    },
-    getImageUrl(path) {
-      if (!path) return "";
-      if (path.startsWith("http")) return path;
-      return "http://localhost:8080" + path;
     },
     formatTime(time) {
       if (!time) return "-";

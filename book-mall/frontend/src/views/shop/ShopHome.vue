@@ -90,6 +90,8 @@
 </template>
 
 <script>
+import { getImageUrl } from "@/utils/img";
+
 export default {
   name: "ShopHome",
   props: {
@@ -217,12 +219,6 @@ export default {
           confirmButtonText: "关闭",
         }
       );
-    },
-    getImageUrl(path) {
-      if (!path) return "";
-      if (path.startsWith("http")) return path;
-      if (path.startsWith("data:")) return path;
-      return "http://localhost:8080" + path;
     },
     goToDetail(id) {
       this.$router.push(`/home/book-detail/${id}`);

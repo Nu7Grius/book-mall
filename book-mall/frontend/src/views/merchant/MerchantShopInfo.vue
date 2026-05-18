@@ -388,6 +388,8 @@
 </template>
 
 <script>
+import { getImageUrl } from "@/utils/img";
+
 export default {
   name: "MerchantShopInfo",
   data() {
@@ -786,16 +788,7 @@ export default {
         }
       });
     },
-    getImageUrl(url) {
-      if (!url) return "";
-      if (url.startsWith("data:")) {
-        return url;
-      }
-      if (url.startsWith("http://") || url.startsWith("https://")) {
-        return url;
-      }
-      return this.$http.defaults.baseURL + url;
-    },
+    getImageUrl,
   },
 };
 </script>

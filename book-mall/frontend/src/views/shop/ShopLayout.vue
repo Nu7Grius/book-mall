@@ -109,6 +109,8 @@
 </template>
 
 <script>
+import { getImageUrl } from "@/utils/img";
+
 export default {
   name: "UserLayout",
   data() {
@@ -168,11 +170,6 @@ export default {
     handleAvatarUpdate() {
       // 头像更新时，重新加载用户信息
       this.loadAvatar();
-    },
-    getImageUrl(path) {
-      if (!path) return "";
-      if (path.startsWith("http")) return path;
-      return "http://localhost:8080" + path;
     },
     handleKeywordChange() {
       if (this.keyword === "" && this.$route.path === "/home/books") {

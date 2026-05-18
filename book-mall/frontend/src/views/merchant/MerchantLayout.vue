@@ -100,6 +100,8 @@
 </template>
 
 <script>
+import { getImageUrl } from "@/utils/img";
+
 export default {
   name: "MerchantLayout",
   data() {

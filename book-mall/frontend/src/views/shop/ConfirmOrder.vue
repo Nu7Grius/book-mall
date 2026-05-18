@@ -159,6 +159,7 @@
 
 <script>
 import regions from "@/utils/regions.js";
+import { getImageUrl } from "@/utils/img";
 
 export default {
   name: "ConfirmOrder",
@@ -345,11 +346,6 @@ export default {
         })
         .catch(() => Promise.resolve());
     },
-    getImageUrl(path) {
-      if (!path) return "";
-      if (path.startsWith("http")) return path;
-      return "http://localhost:8080" + path;
-    },
     loadOrderItems() {
       const query = this.$route.query;
       if (query.bookId) {
@@ -375,11 +371,6 @@ export default {
           }));
         });
       }
-    },
-    getImageUrl(path) {
-      if (!path) return "";
-      if (path.startsWith("http")) return path;
-      return "http://localhost:8080" + path;
     },
     submitOrder() {
       const userId = localStorage.getItem("userId");

@@ -59,6 +59,8 @@
 </template>
 
 <script>
+import { getImageUrl } from "@/utils/img";
+
 export default {
   name: "MyFavorites",
   data() {
@@ -103,12 +105,6 @@ export default {
         .catch(() => {
           this.loading = false;
         });
-    },
-    getImageUrl(path) {
-      if (!path) return "";
-      if (path.startsWith("http")) return path;
-      if (path.startsWith("data:")) return path;
-      return "http://localhost:8080" + path;
     },
     viewBook(bookId) {
       this.$router

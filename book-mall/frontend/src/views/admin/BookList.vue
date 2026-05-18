@@ -360,6 +360,7 @@
 <script>
 import { getBookPage, deleteBook } from "@/api/book";
 import request from "@/api/request";
+import { getImageUrl } from "@/utils/img";
 
 export default {
   name: "BookList",

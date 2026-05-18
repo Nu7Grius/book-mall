@@ -207,6 +207,7 @@
 
 <script>
 import * as echarts from "echarts";
+import { getImageUrl } from "@/utils/img";
 
 export default {
   name: "MerchantHome",
@@ -265,11 +266,6 @@ export default {
     );
   },
   methods: {
-    getImageUrl(path) {
-      if (!path) return "";
-      if (path.startsWith("http")) return path;
-      return "http://localhost:8080" + path;
-    },
     handleOrderStatusUpdate() {
       this.loadStatistics();
       this.loadRecentOrders();

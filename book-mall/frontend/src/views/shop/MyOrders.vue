@@ -259,6 +259,8 @@
 </template>
 
 <script>
+import { getImageUrl } from "@/utils/img";
+
 export default {
   name: "MyOrders",
   data() {
@@ -375,12 +377,6 @@ export default {
     },
     viewOrderDetail(order) {
       this.$router.push(`/home/order-detail/${order.id}`);
-    },
-    getImageUrl(path) {
-      if (!path) return "";
-      if (path.startsWith("http")) return path;
-      if (path.startsWith("data:")) return path;
-      return "http://localhost:8080" + path;
     },
     getStatusType(status) {
       const typeMap = {

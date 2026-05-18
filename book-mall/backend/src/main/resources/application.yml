@@ -30,7 +30,7 @@ spring:
     database: 0  # 使用的数据库编号
     timeout: 5000ms  # 连接超时时间
   resources:
-    static-locations: file:../uploads/,classpath:/static/  # 静态资源路径
+    static-locations: file:./uploads/,classpath:/static/  # 静态资源路径（相对路径，相对于项目根目录）
 
 mybatis-plus:
   configuration:
@@ -53,4 +53,4 @@ logging:
 
 file:
   upload:
-    path: ../uploads  # 文件上传路径（相对于 backend 目录，指向 book-mall/uploads/）
+    path: ./uploads  # 文件上传路径（相对路径，相对于项目根目录）

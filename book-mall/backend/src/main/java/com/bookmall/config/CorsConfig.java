@@ -6,9 +6,6 @@ import org.springframework.web.cors.CorsConfiguration;
 import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
 import org.springframework.web.filter.CorsFilter;
 
-import javax.servlet.Filter;
-import javax.servlet.http.HttpServletResponse;
-
 /**
  * CORS 跨域配置类
  * 配置后端允许跨域请求
@@ -37,28 +34,13 @@ public class CorsConfig {
         
         // 暴露响应头（让前端可以访问这些响应头）
         config.addExposedHeader("Authorization");
-
-        // 允许跨域资源加载（解决 Firefox OpaqueResponseBlocking 问题）
-        config.addExposedHeader("Cross-Origin-Resource-Policy");
-
+        
         // 预检请求的缓存时间（秒）
         config.setMaxAge(3600L);
 
         UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
         source.registerCorsConfiguration("/**", config);
-
+        
         return new CorsFilter(source);
-    }
-
-    /**
-     * 添加跨域资源策略头
-     */
-    @Bean
-    public Filter corsResourcePolicyFilter() {
-        return (request, response, chain) -> {
-            HttpServletResponse httpResponse = (HttpServletResponse) response;
-            httpResponse.setHeader("Cross-Origin-Resource-Policy", "cross-origin");
-            chain.doFilter(request, response);
-        };
     }
 }

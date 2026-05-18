@@ -6,6 +6,8 @@ import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 import org.springframework.web.servlet.resource.PathResourceResolver;
 
+import java.io.File;
+
 @Configuration
 public class WebMvcConfig implements WebMvcConfigurer {
 
@@ -14,11 +16,8 @@ public class WebMvcConfig implements WebMvcConfigurer {
 
     @Override
     public void addResourceHandlers(ResourceHandlerRegistry registry) {
-        String uploadDir = uploadPath.replace("\\", "/");
-        if (!uploadDir.endsWith("/")) {
-            uploadDir = uploadDir + "/";
-        }
-        String filePath = "file:" + uploadDir;
+        String resolvedPath = resolveUploadPath(uploadPath);
+        String filePath = "file:" + resolvedPath + File.separator;
 
         registry.addResourceHandler("/uploads/**")
                 .addResourceLocations(filePath)
@@ -26,10 +25,23 @@ public class WebMvcConfig implements WebMvcConfigurer {
                 .resourceChain(true)
                 .addResolver(new PathResourceResolver());
 
+        String avatarPath = "file:" + resolvedPath + File.separator + "avatar" + File.separator;
         registry.addResourceHandler("/avatar/**")
-                .addResourceLocations("file:" + uploadDir + "avatar/")
+                .addResourceLocations(avatarPath)
                 .setCachePeriod(3600)
                 .resourceChain(true)
                 .addResolver(new PathResourceResolver());
+    }
+
+    private String resolveUploadPath(String path) {
+        if (path.startsWith("./")) {
+            String userDir = System.getProperty("user.dir");
+            String resolved = userDir + File.separator + path.substring(2);
+            return resolved.replace("/", File.separator).replace("\\", File.separator);
+        } else if (!new File(path).isAbsolute()) {
+            String userDir = System.getProperty("user.dir");
+            return userDir + File.separator + path;
+        }
+        return path;
     }
 }

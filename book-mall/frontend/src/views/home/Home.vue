@@ -369,6 +369,7 @@ import {
   getNoticeList,
   getHotMerchants,
 } from "@/api/statistics";
+import { getImageUrl } from "@/utils/img";
 
 export default {
   name: "Home",
@@ -492,11 +493,6 @@ export default {
         system: "info",
       };
       return typeMap[type] || "info";
-    },
-    getImageUrl(path) {
-      if (!path) return "";
-      if (path.startsWith("http")) return path;
-      return "http://localhost:8080" + path;
     },
     showNoticeDetail(notice) {
       this.currentNotice = notice;

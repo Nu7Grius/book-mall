@@ -224,6 +224,8 @@
 </template>
 
 <script>
+import { getImageUrl } from "@/utils/img";
+
 export default {
   name: "MerchantBookList",
   data() {
@@ -271,12 +273,6 @@ export default {
     },
   },
   methods: {
-    getImageUrl(path) {
-      if (!path) return "";
-      if (path.startsWith("http")) return path;
-      if (path.startsWith("data:")) return path;
-      return "http://localhost:8080" + path;
-    },
     handleBookUpdated() {
       this.loadBooks();
     },

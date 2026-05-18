@@ -85,6 +85,8 @@
 </template>
 
 <script>
+import { getImageUrl } from "@/utils/img";
+
 export default {
   name: "Cart",
   data() {
@@ -131,12 +133,6 @@ export default {
           );
         }
       });
-    },
-    getImageUrl(path) {
-      if (!path) return "";
-      if (path.startsWith("http")) return path;
-      if (path.startsWith("data:")) return path;
-      return "http://localhost:8080" + path;
     },
     handleSelectionChange(val) {
       this.selectedItems = val;
