@@ -232,17 +232,21 @@ export default {
         this.canComment = false;
         return;
       }
+      const bookId = this.effectiveBookId;
+      if (!bookId) {
+        this.canComment = false;
+        return;
+      }
       try {
         const res = await axios.get(`/order/user/${user.id}`);
         if (res.code === 200) {
           const orders = res.data?.records || res.data || [];
-          const completedOrders = orders.filter(
-            (o) => o.orderStatus === '已完成' || o.status === 4
+          this.canComment = orders.some(o =>
+            (o.orderStatus === 'PENDING_REVIEW' || o.orderStatus === '待评价') &&
+            o.items && o.items.some(item => item.bookId == bookId)
           );
-          this.canComment = completedOrders.length > 0;
         }
       } catch (error) {
-        this.$message.error("检查订单失败");
         this.canComment = false;
       }
     },
