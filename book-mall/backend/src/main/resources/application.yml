@@ -30,7 +30,7 @@ spring:
     database: 0  # 使用的数据库编号
     timeout: 5000ms  # 连接超时时间
   resources:
-    static-locations: classpath:/static/  # 静态资源路径（上传文件由 WebMvcConfig 处理）
+    static-locations: file:../uploads/,classpath:/static/  # 静态资源路径
 
 mybatis-plus:
   configuration:
