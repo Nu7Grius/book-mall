@@ -74,34 +74,46 @@ book-mall/
 - 数据统计（商家销售统计、管理员全局统计）
 - 快递物流（商家发货录入快递单号）
 
-## 快速开始
+## 前置依赖
 
-### 前置要求
-- JDK 8+
-- Node.js 14+
-- MySQL 8.x（本地开发）或 Supabase 账号（云端）
-- Redis（用于验证码缓存）
+| 依赖 | 用途 |
+|:----|:----|
+| **JDK 8+** | 运行后端 |
+| **Node.js 14+** | 运行前端 |
+| **Maven** | 构建后端 |
+| **MySQL 8.x** | 本地数据库 |
+| **Redis** | 验证码缓存 |
+
+> 如果不需要验证码功能，也可以不装 Redis。
+
+## 快速开始
 
 ### 方式一：使用本地 MySQL
 
-**1. 导入数据库**
+**1. 创建数据库并导入演示数据**
 
 ```bash
-mysql -u root -p < supabase/migrations/create_tables.sql
+mysql -u root -p -e "CREATE DATABASE IF NOT EXISTS book_mall CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;"
+mysql -u root -p book_mall < ../supabase/migrations/create_tables.sql
+mysql -u root -p book_mall < ../supabase/migrations/import_data.sql
+mysql -u root -p book_mall < ../supabase/migrations/import_simple.sql
+mysql -u root -p book_mall < ../supabase/migrations/import_orders.sql
 ```
 
-或使用项目 `database/` 目录下的 `init.sql`。
+**2. 修改数据库密码**
 
-**2. 启动后端**
+打开 `src/main/resources/application.yml`，将 `spring.datasource.password` 改为你的 MySQL 密码。
+
+**3. 启动后端**
 
 ```bash
 cd backend
 mvn spring-boot:run
 ```
 
-后端默认启动在 `http://localhost:8080`
+后端地址：`http://localhost:8080`
 
-**3. 启动前端**
+**4. 启动前端**
 
 ```bash
 cd frontend
@@ -109,7 +121,7 @@ npm install
 npm run dev
 ```
 
-前端默认启动在 `http://localhost:9527`
+前端地址：`http://localhost:9527`
 
 ### 方式二：使用 Supabase 云端数据库
 
@@ -135,7 +147,26 @@ IDEA 启动配置中添加：
 
 ## 小程序端
 
-微信小程序源码位于 `mini-program/` 目录，使用 **HBuilderX** 打开并运行到微信开发者工具。
+微信小程序位于 `mini-program/` 目录。
+
+### 快速使用（推荐）⭐
+
+直接用微信开发者工具打开编译好的文件夹：
+
+```
+mini-program/unpackage/dist/dev/mp-weixin
+```
+
+### 自定义修改
+
+如需修改代码后重新编译：
+
+1. 使用 **HBuilderX** 打开 `mini-program/` 目录
+2. 修改代码后，点击"运行"→"运行到小程序模拟器"→"微信开发者工具"
+3. 编译完成后，双击运行 `fix-lazyCodeLoading.bat` 修复配置
+4. 在微信开发者工具中点击"编译"刷新
+
+> ⚠️ **注意**：由于 uni-app 框架限制，HBuilderX 编译后会覆盖 `lazyCodeLoading` 配置，请运行 `fix-lazyCodeLoading.bat` 修复。
 
 ## 演示数据
 

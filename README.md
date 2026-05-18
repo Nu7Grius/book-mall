@@ -39,11 +39,12 @@ book-mall/
 - **图书管理**：CRUD、上下架、审核、图片上传
 - **分类管理**：两级树形结构
 - **购物车**：多商家商品合并下单
-- **订单管理**：8种状态流转（含退款流程）
-- **评论系统**：评分、商家回复、匿名评价
+- **订单管理**：8种状态流转（待付款→待发货→待收货→待评价→已完成 / 取消 / 退款）
+- **退款系统**：用户申请 → 商家审核 → 退款处理
+- **图书评论**：评分、商家回复、匿名评价（仅订单中可评价）
 - **数据统计**：商家销售统计、管理员全局统计
 
-## ⚠️ 前置依赖（必须安装）
+## ⚠️ 前置依赖
 
 | 依赖 | 用途 | 获取方式 |
 |:----|:----|:--------|
@@ -67,24 +68,26 @@ mysql -u root -p
 CREATE DATABASE book_mall CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
 exit;
 
-# 建表（执行迁移脚本）
+# 建表
 mysql -u root -p book_mall < supabase/migrations/create_tables.sql
 
-# 导入演示数据（包含用户、图书、订单等完整演示数据）
+# 导入演示数据（用户、图书、订单等完整数据）
 mysql -u root -p book_mall < supabase/migrations/import_data.sql
 mysql -u root -p book_mall < supabase/migrations/import_simple.sql
 mysql -u root -p book_mall < supabase/migrations/import_orders.sql
 ```
 
-### 第2步：修改后端数据库配置
+### 第2步：修改数据库密码
 
-打开 `book-mall/backend/src/main/resources/application.yml`，将数据库密码改为你自己的 MySQL 密码：
+打开 `book-mall/backend/src/main/resources/application.yml`，将密码改为你自己的 MySQL 密码：
 
 ```yaml
 spring:
   datasource:
-    password: 你的MySQL密码  # 改为你自己的密码
+    password: 你的MySQL密码
 ```
+
+> 上传路径已配置为相对路径（`../uploads`），无需手动修改。
 
 ### 第3步：启动后端
 
@@ -93,7 +96,7 @@ cd book-mall/backend
 mvn spring-boot:run
 ```
 
-后端默认启动在 `http://localhost:8080`
+后端地址：`http://localhost:8080`
 
 ### 第4步：启动前端
 
@@ -103,13 +106,14 @@ npm install
 npm run dev
 ```
 
-前端默认启动在 `http://localhost:9527`
+前端地址：`http://localhost:9527`
 
 ## 登录账号
 
 | 角色 | 用户名 | 密码 |
 |:----|:------|:----|
 | 超级管理员 | `admin` | `123456` |
+| 普通管理员 | `admincommon` | `123456` |
 | 商家（蘑菇书店） | `merchant1` | `123456` |
 | 商家（西西弗书店） | `merchant2` | `123456` |
 | 商家（思南书局） | `merchant3` | `123456` |
@@ -117,13 +121,24 @@ npm run dev
 
 ## 小程序端
 
-源码位于 `book-mall/mini-program/`，使用 **HBuilderX** 打开并运行到微信开发者工具。
+源码位于 `book-mall/mini-program/`。
 
-**注意：** 小程序需要配置 `mini-program/config/index.js` 中的后端接口地址为你的电脑局域网 IP。
+### 快速使用（推荐）
 
-## 演示数据说明
+直接用微信开发者工具打开编译好的文件夹：
 
-项目已包含完整的演示数据，导入后即可体验所有功能：
+```
+book-mall/mini-program/unpackage/dist/dev/mp-weixin
+```
+
+### 自定义修改
+
+1. 使用 **HBuilderX** 打开 `book-mall/mini-program/` 目录
+2. 修改代码后，点击"运行"→"运行到小程序模拟器"→"微信开发者工具"
+3. 编译完成后，双击运行 `fix-lazyCodeLoading.bat` 修复配置
+4. 在微信开发者工具中点击"编译"刷新
+
+## 演示数据
 
 - **7个账号**（管理员、商家、用户全角色）
 - **50+本图书**（编程、文学、历史、心理等分类）
