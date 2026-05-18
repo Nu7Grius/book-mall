@@ -43,20 +43,67 @@ book-mall/
 - **评论系统**：评分、商家回复、匿名评价
 - **数据统计**：商家销售统计、管理员全局统计
 
-## 快速启动
+## ⚠️ 前置依赖（必须安装）
 
-### 后端
+| 依赖 | 用途 | 获取方式 |
+|:----|:----|:--------|
+| **JDK 8+** | 运行后端 | https://www.oracle.com/java/ |
+| **Node.js 14+** | 运行前端 | https://nodejs.org/ |
+| **Maven** | 构建后端 | IDEA 自带 或 https://maven.apache.org/ |
+| **MySQL 8.x** | 本地数据库 | https://dev.mysql.com/downloads/ |
+| **Redis** | 验证码缓存 | https://redis.io/download/ |
+
+> 如果不需要验证码功能，也可以不装 Redis，启动时忽略 Redis 连接错误即可。
+
+## 快速开始
+
+### 第1步：创建数据库并导入演示数据
+
+```bash
+# 登录 MySQL
+mysql -u root -p
+
+# 创建数据库
+CREATE DATABASE book_mall CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
+exit;
+
+# 建表（执行迁移脚本）
+mysql -u root -p book_mall < supabase/migrations/create_tables.sql
+
+# 导入演示数据（包含用户、图书、订单等完整演示数据）
+mysql -u root -p book_mall < supabase/migrations/import_data.sql
+mysql -u root -p book_mall < supabase/migrations/import_simple.sql
+mysql -u root -p book_mall < supabase/migrations/import_orders.sql
+```
+
+### 第2步：修改后端数据库配置
+
+打开 `book-mall/backend/src/main/resources/application.yml`，将数据库密码改为你自己的 MySQL 密码：
+
+```yaml
+spring:
+  datasource:
+    password: 你的MySQL密码  # 改为你自己的密码
+```
+
+### 第3步：启动后端
+
 ```bash
 cd book-mall/backend
 mvn spring-boot:run
 ```
 
-### 前端
+后端默认启动在 `http://localhost:8080`
+
+### 第4步：启动前端
+
 ```bash
 cd book-mall/frontend
 npm install
 npm run dev
 ```
+
+前端默认启动在 `http://localhost:9527`
 
 ## 登录账号
 
@@ -70,7 +117,20 @@ npm run dev
 
 ## 小程序端
 
-源码位于 `book-mall/mini-program/`，使用 HBuilderX 打开运行。
+源码位于 `book-mall/mini-program/`，使用 **HBuilderX** 打开并运行到微信开发者工具。
+
+**注意：** 小程序需要配置 `mini-program/config/index.js` 中的后端接口地址为你的电脑局域网 IP。
+
+## 演示数据说明
+
+项目已包含完整的演示数据，导入后即可体验所有功能：
+
+- **7个账号**（管理员、商家、用户全角色）
+- **50+本图书**（编程、文学、历史、心理等分类）
+- **51个分类**（两级树形结构）
+- **多个状态的订单**（待发货、待收货、已完成、退款中等）
+- **图书评论和商家回复**
+- **收藏记录、购物车数据**
 
 ---
 
