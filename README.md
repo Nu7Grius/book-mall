@@ -24,8 +24,7 @@ book-mall/                      # 项目主目录
 ├── mini-program/               # 微信小程序（uni-app）
 └── supabase/migrations/        # 数据库迁移脚本
 
-database/                       # 数据库备份
-└── book_mall_export.sql        # MySQL 完整导出（建表+演示数据）
+book-mall_export.sql            # MySQL 完整导出（建表+演示数据）
 ```
 
 ## 技术栈
@@ -72,7 +71,7 @@ CREATE DATABASE book_mall CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
 exit;
 
 # 导入完整数据库（建表 + 演示数据一步到位）
-mysql -u root -p book_mall < ../database/book_mall_export.sql
+mysql -u root -p book_mall < book_mall_export.sql
 ```
 
 ### 第2步：修改数据库密码
