@@ -9,7 +9,7 @@
 ## 项目结构
 
 ```
-book-mall/
+book-mall/                      # 项目主目录
 ├── backend/                    # SpringBoot 后端项目
 │   ├── controller/             # API 控制器
 │   ├── service/                # 业务逻辑层
@@ -23,6 +23,9 @@ book-mall/
 │       └── user/               # 登录注册
 ├── mini-program/               # 微信小程序（uni-app）
 └── supabase/migrations/        # 数据库迁移脚本
+
+database/                       # 数据库备份
+└── book_mall_export.sql        # MySQL 完整导出（建表+演示数据）
 ```
 
 ## 技术栈
@@ -68,13 +71,8 @@ mysql -u root -p
 CREATE DATABASE book_mall CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
 exit;
 
-# 建表
-mysql -u root -p book_mall < supabase/migrations/create_tables.sql
-
-# 导入演示数据（用户、图书、订单等完整数据）
-mysql -u root -p book_mall < supabase/migrations/import_data.sql
-mysql -u root -p book_mall < supabase/migrations/import_simple.sql
-mysql -u root -p book_mall < supabase/migrations/import_orders.sql
+# 导入完整数据库（建表 + 演示数据一步到位）
+mysql -u root -p book_mall < ../database/book_mall_export.sql
 ```
 
 ### 第2步：修改数据库密码
@@ -143,11 +141,13 @@ book-mall/mini-program/unpackage/dist/dev/mp-weixin
 
 ## 演示数据
 
-- **7个账号**（管理员、商家、用户全角色）
-- **50+本图书**（编程、文学、历史、心理等分类）
-- **51个分类**（两级树形结构）
-- **多个状态的订单**（待发货、待收货、已完成、退款中等）
-- **图书评论和商家回复**
+- **7个账号**（超级管理员、普通管理员、3家商家、2个普通用户）
+- **36本图书**（编程、文学、历史、心理、经济管理、儿童等分类）
+- **51个分类**（12个一级分类 + 39个二级分类，两级树形结构）
+- **62个订单**（待付款、待发货、待收货、已完成、已取消、退款中等多种状态）
+- **133条订单明细**
+- **103条退款申请记录**（含已通过、已拒绝、待处理等状态）
+- **13条图书评论**（含商家回复）
 - **收藏记录、购物车数据**
 
 ---
