@@ -1,0 +1,312 @@
+
+.refund-detail-container.data-v-3847af48 {
+  min-height: 100vh;
+  background-color: #f5f5f5;
+}
+.loading-section.data-v-3847af48 {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 300rpx;
+  color: #999;
+  font-size: 28rpx;
+}
+.error-section.data-v-3847af48 {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 200rpx 0;
+}
+.error-icon.data-v-3847af48 {
+  font-size: 80rpx;
+  margin-bottom: 30rpx;
+}
+.error-text.data-v-3847af48 {
+  font-size: 28rpx;
+  color: #666;
+  margin-bottom: 40rpx;
+}
+.btn-retry.data-v-3847af48 {
+  width: 240rpx;
+  height: 72rpx;
+  line-height: 72rpx;
+  background-color: #15803d;
+  color: #fff;
+  font-size: 28rpx;
+  border-radius: 36rpx;
+  border: none;
+}
+.refund-content.data-v-3847af48 {
+  padding-bottom: 60rpx;
+}
+
+/* 退款金额卡片 */
+.amount-card.data-v-3847af48 {
+  background: #fff;
+  padding: 40rpx 30rpx;
+  margin-bottom: 20rpx;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+.amount-label.data-v-3847af48 {
+  font-size: 28rpx;
+  color: #999;
+  margin-bottom: 12rpx;
+}
+.amount-value.data-v-3847af48 {
+  font-size: 56rpx;
+  color: #ee4b2b;
+  font-weight: bold;
+}
+
+/* 通用区块 */
+.section.data-v-3847af48 {
+  background-color: #fff;
+  margin-bottom: 20rpx;
+}
+
+/* 商品信息 */
+.goods-section.data-v-3847af48 {
+  padding: 30rpx;
+}
+.goods-card.data-v-3847af48 {
+  display: flex;
+  background-color: #fafafa;
+  border-radius: 12rpx;
+  padding: 20rpx;
+}
+.goods-cover.data-v-3847af48 {
+  width: 140rpx;
+  height: 180rpx;
+  border-radius: 8rpx;
+  margin-right: 20rpx;
+  flex-shrink: 0;
+  background-color: #eee;
+}
+.goods-info.data-v-3847af48 {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+.goods-name.data-v-3847af48 {
+  font-size: 28rpx;
+  color: #333;
+  font-weight: 500;
+  margin-bottom: 8rpx;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+  overflow: hidden;
+}
+.goods-author.data-v-3847af48 {
+  font-size: 24rpx;
+  color: #999;
+  margin-bottom: 12rpx;
+}
+.goods-bottom.data-v-3847af48 {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.goods-price.data-v-3847af48 {
+  font-size: 30rpx;
+  color: #ee4b2b;
+  font-weight: bold;
+}
+.goods-quantity.data-v-3847af48 {
+  font-size: 26rpx;
+  color: #999;
+}
+
+/* 退款状态 */
+.status-section.data-v-3847af48 {
+  padding: 24rpx 30rpx;
+  display: flex;
+  justify-content: center;
+}
+.status-badge.data-v-3847af48 {
+  display: inline-flex;
+  align-items: center;
+  padding: 12rpx 32rpx;
+  border-radius: 40rpx;
+  font-size: 28rpx;
+  font-weight: 500;
+}
+.status-badge.badge-pending.data-v-3847af48 {
+  color: #fa8c16;
+  background-color: #fff7e6;
+}
+.status-badge.badge-approved.data-v-3847af48 {
+  color: #52c41a;
+  background-color: #f6ffed;
+}
+.status-badge.badge-rejected.data-v-3847af48 {
+  color: #f5222d;
+  background-color: #fff1f0;
+}
+.status-badge.badge-cancelled.data-v-3847af48 {
+  color: #8c8c8c;
+  background-color: #fafafa;
+}
+.status-icon.data-v-3847af48 {
+  font-size: 32rpx;
+  margin-right: 12rpx;
+}
+
+/* 退款信息 */
+.info-section.data-v-3847af48 {
+  padding: 24rpx 30rpx;
+}
+.info-row.data-v-3847af48 {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  padding: 16rpx 0;
+  border-bottom: 1px solid #f5f5f5;
+}
+.info-row.data-v-3847af48:last-child {
+  border-bottom: none;
+}
+.info-row .label.data-v-3847af48 {
+  font-size: 28rpx;
+  color: #666;
+  flex-shrink: 0;
+  width: 140rpx;
+}
+.info-row .value.data-v-3847af48 {
+  font-size: 28rpx;
+  color: #333;
+  text-align: right;
+  flex: 1;
+  margin-left: 20rpx;
+}
+
+/* 商家回复 */
+.reply-section.data-v-3847af48 {
+  padding: 24rpx 30rpx;
+}
+.reply-header.data-v-3847af48 {
+  margin-bottom: 20rpx;
+}
+.reply-title.data-v-3847af48 {
+  font-size: 30rpx;
+  font-weight: bold;
+  color: #333;
+}
+.reply-alert.data-v-3847af48 {
+  border-radius: 12rpx;
+  padding: 24rpx;
+  margin-bottom: 16rpx;
+}
+.reply-alert.alert-error.data-v-3847af48 {
+  background-color: #fff2f0;
+}
+.reply-alert.alert-success.data-v-3847af48 {
+  background-color: #f6ffed;
+}
+.reply-alert-header.data-v-3847af48 {
+  display: flex;
+  align-items: center;
+  margin-bottom: 12rpx;
+}
+.reply-alert-icon.data-v-3847af48 {
+  font-size: 32rpx;
+  margin-right: 12rpx;
+}
+.reply-alert-title.data-v-3847af48 {
+  font-size: 28rpx;
+  font-weight: bold;
+  color: #333;
+}
+.reply-alert.alert-error .reply-alert-title.data-v-3847af48 {
+  color: #f5222d;
+}
+.reply-alert.alert-success .reply-alert-title.data-v-3847af48 {
+  color: #52c41a;
+}
+.reply-alert-content.data-v-3847af48 {
+  font-size: 28rpx;
+  color: #333;
+  line-height: 1.6;
+  display: block;
+}
+.reply-time.data-v-3847af48 {
+  font-size: 24rpx;
+  color: #999;
+}
+
+/* 后续操作 */
+.action-section.data-v-3847af48 {
+  padding: 24rpx 30rpx;
+}
+.action-title.data-v-3847af48 {
+  font-size: 30rpx;
+  font-weight: bold;
+  color: #333;
+  margin-bottom: 20rpx;
+}
+.action-buttons.data-v-3847af48 {
+  display: flex;
+  gap: 20rpx;
+}
+.btn-action.data-v-3847af48 {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 24rpx;
+  border-radius: 12rpx;
+  font-size: 28rpx;
+  border: none;
+  background-color: #f5f5f5;
+}
+.btn-action.data-v-3847af48:first-child {
+  background-color: #fff3e0;
+  color: #fa8c16;
+}
+.btn-action.data-v-3847af48:last-child {
+  background-color: #e6f7ff;
+  color: #1890ff;
+}
+.btn-icon.data-v-3847af48 {
+  font-size: 32rpx;
+  margin-right: 12rpx;
+}
+.btn-text.data-v-3847af48 {
+  font-weight: 500;
+}
+
+/* 退款通过提示 */
+.success-section.data-v-3847af48 {
+  padding: 24rpx 30rpx;
+}
+.success-alert.data-v-3847af48 {
+  display: flex;
+  align-items: flex-start;
+  background-color: #f6ffed;
+  border-radius: 12rpx;
+  padding: 24rpx;
+}
+.success-icon.data-v-3847af48 {
+  font-size: 40rpx;
+  margin-right: 16rpx;
+}
+.success-text.data-v-3847af48 {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+.success-title.data-v-3847af48 {
+  font-size: 28rpx;
+  font-weight: bold;
+  color: #52c41a;
+  margin-bottom: 8rpx;
+}
+.success-desc.data-v-3847af48 {
+  font-size: 26rpx;
+  color: #666;
+}
+

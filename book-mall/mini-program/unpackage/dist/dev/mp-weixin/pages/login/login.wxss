@@ -1,0 +1,101 @@
+
+.login-container.data-v-b237504c {
+  min-height: 100vh;
+  background: linear-gradient(135deg, #15803d 0%, #166534 100%);
+  padding: 60rpx 40rpx;
+}
+.login-header.data-v-b237504c {
+  text-align: center;
+  padding: 80rpx 0;
+}
+.logo.data-v-b237504c {
+  width: 160rpx;
+  height: 160rpx;
+  border-radius: 80rpx;
+  background-color: #fff;
+  margin-bottom: 30rpx;
+}
+.title.data-v-b237504c {
+  display: block;
+  font-size: 48rpx;
+  font-weight: bold;
+  color: #fff;
+  margin-bottom: 16rpx;
+}
+.subtitle.data-v-b237504c {
+  display: block;
+  font-size: 28rpx;
+  color: rgba(255, 255, 255, 0.9);
+}
+.login-form.data-v-b237504c {
+  background-color: #fff;
+  border-radius: 24rpx;
+  padding: 60rpx 40rpx;
+  box-shadow: 0 8rpx 32rpx rgba(0, 0, 0, 0.1);
+}
+.form-item.data-v-b237504c {
+  margin-bottom: 40rpx;
+  position: relative;
+}
+.label.data-v-b237504c {
+  font-size: 28rpx;
+  color: #333;
+  margin-bottom: 16rpx;
+  font-weight: 500;
+}
+.input-wrapper.data-v-b237504c {
+  position: relative;
+  width: 100%;
+}
+.input.data-v-b237504c {
+  width: 100%;
+  height: 88rpx;
+  background-color: #f5f5f5;
+  border-radius: 44rpx;
+  padding: 0 120rpx 0 40rpx;
+  font-size: 28rpx;
+  box-sizing: border-box;
+}
+.placeholder.data-v-b237504c {
+  color: #999;
+}
+.password-toggle.data-v-b237504c {
+  position: absolute;
+  right: 30rpx;
+  top: 50%;
+  -webkit-transform: translateY(-50%);
+          transform: translateY(-50%);
+  color: #15803d;
+  font-size: 26rpx;
+  padding: 10rpx 20rpx;
+  background: rgba(21, 128, 61, 0.1);
+  border-radius: 20rpx;
+  border: none;
+}
+.btn-login.data-v-b237504c {
+  width: 100%;
+  height: 88rpx;
+  background: linear-gradient(135deg, #15803d 0%, #166534 100%);
+  color: #fff;
+  border-radius: 44rpx;
+  font-size: 32rpx;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: 40rpx;
+  border: none;
+}
+.btn-login.data-v-b237504c:active {
+  opacity: 0.9;
+}
+.register-link.data-v-b237504c {
+  text-align: center;
+  margin-top: 40rpx;
+  font-size: 28rpx;
+  color: #666;
+}
+.link.data-v-b237504c {
+  color: #15803d;
+  margin-left: 8rpx;
+}
+
